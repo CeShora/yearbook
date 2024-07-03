@@ -1,4 +1,4 @@
-{% comment %} {% extends 'base.html' %}
+{% extends 'base.html' %}
 {% block title %} IStudent Form {% endblock %}
 {% load static %}
 {% load custom_tags %}
@@ -28,55 +28,72 @@
 
 </style>
 {% endblock %}
+
+
+
 {% csrf_token %}
-{{ student_form.as_p }}
-{{ answer_formset.management_form }}
-
-    {% for form in answer_formset %}
-        {{ form.as_p }}
-    {% endfor %}
-
-
 {% block content %}
     <form method="post" class='studentform'>
         <div class='row'>
             <div class='col-12'>
                 <div class="mb-3 right-align">
+                    <label for="Inputstudentid" class="form-label">student id </label>
+                    <input type="text" class="form-control" id="Inputstudentid">
+                </div>
+                <div class="mb-3 right-align">
                     <div class="input-group">
-                        <input type="text" aria-label="Last name" class="form-control right-align black" id="InputLastName" placeholder='نام خانوادگی'>
-                        <input type="text" aria-label="First name" class="form-control right-align black" id="InputName" placeholder='نام'>
+                        <input type="text" aria-label="Last name" class="form-control right-align black" id="InputLastName" placeholder='last name'>
+                        <input type="text" aria-label="First name" class="form-control right-align black" id="InputName" placeholder='first name'>
                     </div>
-                    <label for="InputEmail1" class="form-label ">ایمیل</label>
+                    <label for="InputEmail1" class="form-label ">email</label>
                     <input type="email" class="form-control" id="InputEmail1" aria-describedby="emailHelp">
                 </div>
                 <div class="mb-3 right-align">
-                    <label for="Inputgithublink" class="form-label">لینک گیتاب  </label>
+                    <label for="Inputgithublink" class="form-label">github link  </label>
                     <input type="link" class="form-control" id="Inputgithublink">
                 </div>
                 <div class="mb-3 right-align">
-                    <label for="Inputlinkedinlink" class="form-label">لینکدین  </label>
+                    <label for="Inputlinkedinlink" class="form-label">linked in link  </label>
                     <input type="link" class="form-control" id="Inputlinkedinlink">
                 </div>
                 <div class="mb-3 right-align">
-                    <label for="Inputoneliner" class="form-label">نقل قول  </label>
+                    <label for="Inputoneliner" class="form-label">one liner </label>
                     <input type="text" class="form-control" id="Inputoneliner">
                 </div>
                 <div class="mb-3 right-align">
-                    <label for="Inputdescription" class="form-label">دلنامه  </label>
+                    <label for="Inputphone" class="form-label">phone  </label>
+                    <input type="text" class="form-control" id="Inputphone">
+                </div>
+                <div class="mb-3 right-align">
+                    <label for="Inputdescription" class="form-label">description  </label>
                     <textarea class="form-control" id="Inputdescription" rows="20"></textarea>
                 </div>
+				<div class="mb-3">
+					<label for="InputPassword" class="form-label">Password</label>
+					<input type="password" class="form-control" id="InputPassword" placeholder="password">
+					<input type="password" class="form-control" id="InputRepeatPassword" placeholder="repeat password">
+				 </div>
+
+                 {{ answer_formset.management_form }}
+                {% for form in answer_formset %}
+                    <div class="mb-3 right-align">
+                        <label for="id_question_{{ forloop.counter }}" class="form-label">Question {{ forloop.counter }}</label>
+                        <input type="hidden" name="form-{{ forloop.counter0 }}-question_number" value="{{ forloop.counter0 }}">
+                        <textarea name="form-{{ forloop.counter0 }}-answer_text" class="form-control" id="id_question_{{ forloop.counter }}" rows="3">{{ form.answer_text.value|default_if_none:'' }}</textarea>
+                    </div>
+                {% endfor %}
                 <button type="submit" class="btn btn-primary">Submit</button>
             </div>
         </div>
     </form>    
 {% endblock %}
-   {% endcomment %}
-   <form method="post">
-    {% csrf_token %}
+
+<form method="post">
+{% csrf_token %}
+{{ form.as_p }}
+{{ answer_formset.management_form }}
+{% for form in answer_formset %}
     {{ form.as_p }}
-    {{ answer_formset.management_form }}
-    {% for form in answer_formset %}
-        {{ form.as_p }}
-    {% endfor %}
-    <button type="submit">Save</button>
+{% endfor %}
+<button type="submit">Save</button>
 </form>
