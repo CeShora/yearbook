@@ -1,7 +1,7 @@
 from django import forms
 from django.forms import inlineformset_factory
 from django.contrib.auth import get_user_model
-from .models import QUESTIONS, Student, Answer
+from .models import QUESTIONS, Student, Answer, Comment
 
 User = get_user_model()
 
@@ -87,3 +87,11 @@ def get_dynamic_answer_forms(answers=None):
 
     return DynamicAnswerForm
 
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['text']
+        widgets = {
+            'text': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Write your comment here...'}),
+        }

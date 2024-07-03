@@ -9,6 +9,7 @@ urlpatterns = [
     path('student/new/', views.student_create, name='student_create'),  # JUST CHECK ABOUT LOGIN
     path('student/update/', views.student_update, name='student_update'),
     path('student/<str:student_id>/', views.student_detail, name='student_detail'), # ADD THE IMAGE LATER
+    path('student/<int:student_id>/comment/', views.PostCommentView.as_view(), name='post_comment'),
     # path('student/<str:student_id>/delete/', views.student_delete, name='student_delete'),
     path('login/', views.StudentLoginView.as_view(), name='login') # MAKE IT PRETTIER
 ]

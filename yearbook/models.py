@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.validators import MinLengthValidator
 from django.contrib.auth.models import AbstractUser, BaseUserManager
+from django.conf import settings
 
 class CustomUserManager(BaseUserManager):
     def create_user(self, student_id, email, first_name, last_name, password=None, **extra_fields):
@@ -20,6 +21,7 @@ class CustomUserManager(BaseUserManager):
         extra_fields.setdefault('is_superuser', True)
 
         return self.create_user(student_id, email, first_name, last_name, password, **extra_fields)
+
 
 
 class Student(AbstractUser):
@@ -51,6 +53,15 @@ class Answer(models.Model):
     def __str__(self):
         return f"{self.answer_text}"
 
+
+class Comment(models.Model):
+    student = models.ForeignKey(Student, related_name='comments', on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    text = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'Comment by {self.user} on {self.student}'
 
 QUESTIONS = ["خنده دار ترین سوتیت چی بود؟",
 "اگر به 4 سال پیش برگردی چه کاری رو انجام نمیدی؟\n و چه کاری رو انجام میدی؟",

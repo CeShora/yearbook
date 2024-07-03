@@ -1,8 +1,10 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import View
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import QUESTIONS, Answer, Student
-from .forms import StudentProfileForm, AnswerFormSet, get_dynamic_answer_forms
+from .forms import CommentForm, StudentProfileForm, AnswerFormSet, get_dynamic_answer_forms
 from .forms import StudentRegistrationForm
 from django.contrib.auth.views import LoginView
 
@@ -15,8 +17,31 @@ def student_list(request):
 
 def student_detail(request, student_id):
     student = get_object_or_404(Student, student_id=student_id)
-    answers = student.answers.all()  # Fetch all related answers for the student
-    return render(request, 'yearbook/student_detail.html', {'student': student, 'answers': answers, 'questions': QUESTIONS, 'num_questions': len(QUESTIONS)})
+    answers = student.answers.all()  
+    comments = student.comments.all()
+    questions = QUESTIONS
+
+    if request.method == 'POST':
+        comment_form = CommentForm(request.POST)
+        if comment_form.is_valid():
+            comment = comment_form.save(commit=False)
+            comment.student = student
+            comment.user = request.user
+            comment.save()
+            messages.success(request, 'Your comment has been posted.')
+            return redirect('student_detail', student_id=student_id)
+    else:
+        comment_form = CommentForm()
+
+    return render(request, 'yearbook/student_detail.html', {
+        'student': student,
+        'answers': answers,
+        'comments': comments,
+        'comment_form': comment_form,
+        'questions': questions,
+        'num_questions': len(questions),
+    })
+
 
 def student_create(request):
     DynamicAnswerForm = get_dynamic_answer_forms()
@@ -42,7 +67,6 @@ def student_create(request):
         'student_form': student_form,
         'answer_form': answer_form,
     })
-
 
 
 @login_required
@@ -97,3 +121,16 @@ def student_delete(request, student_id):
 
 class StudentLoginView(LoginView):
     template_name = 'yearbook/login.html'
+
+
+class PostCommentView(LoginRequiredMixin, View):
+    def post(self, request, student_id):
+        student = get_object_or_404(Student, student_id=student_id)
+        comment_form = CommentForm(request.POST)
+        if comment_form.is_valid():
+            comment = comment_form.save(commit=False)
+            comment.student = student
+            comment.user = request.user
+            comment.save()
+            messages.success(request, 'Your comment has been posted.')
+        return redirect('student_detail', student_id=student_id)
