@@ -15,7 +15,7 @@ def student_list(request):
 def student_detail(request, student_id):
     student = get_object_or_404(Student, student_id=student_id)
     answers = student.answers.all()  # Fetch all related answers for the student
-    return render(request, 'yearbook/student_detail.html', {'student': student, 'answers': answers, 'questions': QUESTIONS})
+    return render(request, 'yearbook/student_detail.html', {'student': student, 'answers': answers, 'questions': QUESTIONS, 'num_questions': len(QUESTIONS)})
 
 def student_create(request):
     DynamicAnswerForm = get_dynamic_answer_forms()
