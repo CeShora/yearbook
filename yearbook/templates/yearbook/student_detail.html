@@ -1,0 +1,201 @@
+{% extends 'base.html' %}
+{% block title %}{{student.first_name}} {{student.last_name}}{% endblock %}
+{% load static %}
+{% load custom_tags %}
+
+{% block extra_css %}
+    <style>
+        
+    .right-align {
+        text-align: right;
+    }
+
+    .light-blue {
+        color:  rgb(22, 95, 184);
+    }
+
+    .mid-blue {
+        color:  rgb(18, 76, 147);
+    }
+
+    .dark-blue {
+        color:  rgb(19,52,93);
+    }
+
+    .all-title-box{
+        background: url('{% static 'yearbook/images/4.png' %}')no-repeat;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        background-position: center 56%;
+        min-height: 200px;
+    }
+
+    .all-title-box h1{
+        color: #fff;
+        font-weight: 600;
+        text-transform: capitalize;
+        padding-top: 7%;
+        font-size: 70px;
+        line-height: 0px;
+    }
+
+    .buttom-padding{
+        padding-bottom: 100px;
+
+    }
+
+    #student-page {
+        background-color: rgb(255, 255, 255);
+        padding: 60px 0; 
+    }
+
+    #student-page .container {
+        /* color: #fff;  */
+        color:  rgb(22, 62, 110);
+        
+    }
+
+    #student-page .image-student img {
+    border: 5px solid rgb(19,52,93); /* Adds a semi-transparent white border */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adds a subtle shadow */
+    opacity: 0.9; /* Slightly reduces the opacity */
+    transition: transform 0.3s, box-shadow 0.3s, opacity 0.3s, filter 0.3s; /* Smooth transition on hover */
+    max-width: 100% !important; 
+    max-height: 400px !important;
+    width: auto; 
+    height: auto; 
+    margin: 0 auto; 
+    display: block; 
+    }
+
+    .navbar {
+    background-color: rgb(23, 38, 79); 
+    }
+
+    .navbar .btn-login:active,
+    .navbar .btn-login:hover,
+    .navbar .btn-login:focus
+    .navbar .btn-login{
+    background-color: rgb(56, 95, 194) !important;
+    border-color: rgb(38, 66, 145) !important;
+    }
+
+    .custom-lrnmore-btn {
+    background-color: rgb(56, 95, 194) !important;
+    border-color: rgb(38, 66, 145) !important;
+    color: #fff !important; 
+    transition: background-color 0.3s, border-color 0.3s ;
+    }
+
+    .custom-lrnmore-btn:hover,
+    .custom-lrnmore-btn:focus,
+    .custom-lrnmore-btn:active {
+        background-color: rgb(38, 66, 145) !important;
+        border-color: rgb(28, 50, 109) !important;
+        color: #fff !important; /* Ensure the text is visible */
+    }
+
+
+    </style>
+{% endblock %}
+
+
+{% block content %}
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg sticky-top" data-bs-theme="dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">Autbase</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/yearbook/ce/98">Yearbook98</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/about">About</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/Gallery">Gallery</a>
+                </li>
+                <li class="nav-item">
+                <a class="btn btn-login" href="/login">Login</a>
+                </li>
+            </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="all-title-box">
+        <div class="text-center">
+            <h1>Class of 98</h1>
+        </div>
+    </div>	
+    
+    <div id="student-page" class="section wb">
+        <div class="container">
+            <div class="row buttom-padding"> 
+                <div class="col-lg-6" >
+                    <div class="image-student">
+                        <img src="{% static 'yearbook/images/96-4.JPG' %}" alt="" class="img-fluid">
+                    </div>
+                </div>
+                <div class="col-lg-6 col-12" >
+                    <h1 class="right-align">{{ student.first_name }} {{ student.last_name }}</h1>
+                    <h2 class="right-align light-blue">{{student.student_id}}</h2>
+                    {% if student.one_liner %}
+                        <h5 class="right-align light-blue">{{student.one_liner}}</h5>
+                    {% endif %}
+
+                    <hr>
+                    <h1>Contact info</h1>
+                    <ul class="light-blue">
+                        <li><strong>Email: </strong><a>{{student.email}} </a></li>
+                        {% if student.github_link %}
+                            <li><strong>Github: </strong> <a href="{{ student.github_link }}">{{student.github_link}}</a></li>
+                        {% endif %}
+
+                        {% if student.linkedin_link %}
+                            <li><strong>LinkedIn: </strong> <a href="{{ student.linkedin_link }}">{{student.linkedin_link}}</a></li>
+                        {% endif %}
+
+                        {% if student.phone %}
+                            <li><strong>Phone: </strong><a>{{student.phone}}</a></li>
+                        {% endif %}
+
+                    </ul>
+                </div>
+                <div class="col-12">
+                    {% if student.description %}
+                        <p>{{student.description}}</p>
+                    {% endif %}
+                    
+                </div>
+            </div>
+            <div class="row"> 
+                <div class="col-lg-12 right-align">
+                    {% if answers %}
+                        <h3 class="mid-blue">:سوالات</h3>
+                    {% endif %}
+
+                    {% for answer in answers %}
+                        <h5 class="light-blue">:{{ questions|index:answer.question_number }}</h5>
+                        {% if student.description %}
+                            <p>{{answer}}</p>
+                        {% else %}
+                            <p> --- </p>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    
+{% endblock %}

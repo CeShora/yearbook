@@ -1,0 +1,82 @@
+{% comment %} {% extends 'base.html' %}
+{% block title %} IStudent Form {% endblock %}
+{% load static %}
+{% load custom_tags %}
+
+{% block extra_css %}
+<style>
+
+ .row{
+    padding: 60px 30% 60px 30%; 
+ }
+
+ 
+
+ .studentform {
+    background-color: rgba(23, 38, 79, 0.7); 
+    padding: 60px 0; 
+}
+     
+ .right-align {
+    text-align: right;
+    color: #fff !important; 
+}
+ .black{
+    color: rgb(0,0,0) !important;
+ }
+
+
+</style>
+{% endblock %}
+{% csrf_token %}
+{{ student_form.as_p }}
+{{ answer_formset.management_form }}
+
+    {% for form in answer_formset %}
+        {{ form.as_p }}
+    {% endfor %}
+
+
+{% block content %}
+    <form method="post" class='studentform'>
+        <div class='row'>
+            <div class='col-12'>
+                <div class="mb-3 right-align">
+                    <div class="input-group">
+                        <input type="text" aria-label="Last name" class="form-control right-align black" id="InputLastName" placeholder='نام خانوادگی'>
+                        <input type="text" aria-label="First name" class="form-control right-align black" id="InputName" placeholder='نام'>
+                    </div>
+                    <label for="InputEmail1" class="form-label ">ایمیل</label>
+                    <input type="email" class="form-control" id="InputEmail1" aria-describedby="emailHelp">
+                </div>
+                <div class="mb-3 right-align">
+                    <label for="Inputgithublink" class="form-label">لینک گیتاب  </label>
+                    <input type="link" class="form-control" id="Inputgithublink">
+                </div>
+                <div class="mb-3 right-align">
+                    <label for="Inputlinkedinlink" class="form-label">لینکدین  </label>
+                    <input type="link" class="form-control" id="Inputlinkedinlink">
+                </div>
+                <div class="mb-3 right-align">
+                    <label for="Inputoneliner" class="form-label">نقل قول  </label>
+                    <input type="text" class="form-control" id="Inputoneliner">
+                </div>
+                <div class="mb-3 right-align">
+                    <label for="Inputdescription" class="form-label">دلنامه  </label>
+                    <textarea class="form-control" id="Inputdescription" rows="20"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </form>    
+{% endblock %}
+   {% endcomment %}
+   <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    {{ answer_formset.management_form }}
+    {% for form in answer_formset %}
+        {{ form.as_p }}
+    {% endfor %}
+    <button type="submit">Save</button>
+</form>

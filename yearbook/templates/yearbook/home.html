@@ -1,0 +1,261 @@
+{% extends 'base.html' %}
+{% block title %}Autbase{% endblock %}
+{% load static %}
+{% block extra_css %}
+    <style>
+
+        
+
+    #overviews {
+        background-color: rgba(23, 38, 79, 0.7); /* Adjust the transparency as needed */
+        padding: 60px 0; 
+    }
+
+    #overviews .container {
+        color: #fff; 
+    }
+
+    #overviews .post-media img {
+    border: 5px solid rgba(255, 255, 255, 0.3); /* Adds a semi-transparent white border */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adds a subtle shadow */
+    opacity: 0.9; /* Slightly reduces the opacity */
+    transition: transform 0.3s, box-shadow 0.3s, opacity 0.3s, filter 0.3s; /* Smooth transition on hover */
+    max-width: 100%; /* Ensures the image doesn't exceed the width of its container */
+    max-height: 400px; /* Sets a maximum height for the images */
+    width: auto; /* Maintains the aspect ratio */
+    height: auto; /* Maintains the aspect ratio */
+    margin: 0 auto; /* Centers the image within its container */
+    display: block; /* Ensures the image behaves like a block element */
+}
+
+#overviews .post-media img:hover {
+    transform: scale(1.05); /* Slightly enlarges the image on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Increases shadow on hover */
+    opacity: 1; /* Restores full opacity on hover */
+    filter: brightness(0.7); /* Applies a color filter */
+}
+
+
+.navbar .btn-login{
+    background-color: rgb(38, 66, 145);
+    border-color: rgb(38, 66, 145);
+    transition: background-color 0.3s, border-color 0.3s;
+    color: #fff; 
+
+    }
+
+    
+    .navbar .btn-login:active,
+    .navbar .btn-login:hover,
+    .navbar .btn-login:focus{
+      background-color: rgb(56, 95, 194);
+      border-color: rgb(38, 66, 145); /* Border color on hover */
+      color: #fff; 
+    }
+
+
+    .custom-lrnmore-btn {
+    background-color: rgb(56, 95, 194) !important;
+    border-color: rgb(38, 66, 145) !important;
+    color: #fff !important; 
+    transition: background-color 0.3s, border-color 0.3s !important;
+}
+
+.custom-lrnmore-btn:hover,
+.custom-lrnmore-btn:focus,
+.custom-lrnmore-btn:active {
+    background-color: rgb(38, 66, 145) !important;
+    border-color: rgb(28, 50, 109) !important;
+    color: #fff !important; 
+}
+
+    .navbar {
+    background-color: rgb(23, 38, 79);
+    }
+
+    .carousel-item {
+      height: 700px; /* Adjust the height as needed */
+    }
+
+    .carousel-item img {
+      height: 100%;
+      width: auto;
+      object-fit: cover; /* Ensures the image covers the entire carousel item without distortion */
+    }
+
+    .carousel-caption {
+      position: absolute !important;
+      bottom: 20px !important;
+      left: 0 !important;
+      right: 0 !important;
+      background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+      color: white;
+      padding: 10px !important;
+      text-align: center !important;
+    }
+
+    </style>
+    {% endblock %}
+
+    
+    {% block content %}
+    <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg sticky-top" data-bs-theme="dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">Autbase</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/yearbook/ce/98">Yearbook98</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/about">About</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/Gallery">Gallery</a>
+            </li>
+            <li class="nav-item">
+            <a class="btn btn-login" href="/login">Login</a>
+            </li>
+        </ul>
+        </div>
+    </div>
+  </nav>
+
+  
+
+    <!-- CAROUSEL -->
+
+    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="{% static 'yearbook/images/96-1.JPG' %}" class="d-block w-100" alt="...">
+        <div class="carousel-caption">
+          <h5>96th's Graduation</h5>
+          <p>Lorem ipsum1</p>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="{% static 'yearbook/images/96-2.JPG' %}" class="d-block w-100" alt="...">
+        <div class="carousel-caption">
+          <h5>96th's Graduation</h5>
+          <p>Lorem ipsum2</p>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="{% static 'yearbook/images/96-3.JPG' %}" class="d-block w-100" alt="...">
+        <div class="carousel-caption">
+          <h5>96th's Graduation</h5>
+          <p>Lorem ipsum3</p>
+        </div>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+
+
+  <div id="overviews" class="section wb">
+        <div class="container">
+            <div class="section-title row text-center">
+                <div class="col-md-8 offset-md-2">
+                    <h3>About</h3>
+                    <p class="lead">Lorem Ipsum dolroin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem!</p>
+                </div>
+            </div><!-- end title -->
+        
+            <div class="row align-items-center">
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                    <div class="message-box">
+                        <h4>TEST</h4>
+                        <h2>TITLE </h2>
+                        <p>Quisque eget nisl id nulla sagittis auctor quis id. Aliquam quis vehicula enim, non aliquam risus. Sed a tellus quis mi rhoncus dignissim.</p>
+
+                        <p> Integer rutrum ligula eu dignissim laoreet. Pellentesque venenatis nibh sed tellus faucibus bibendum. Sed fermentum est vitae rhoncus molestie. Cum sociis natoque penatibus et magnis montes, nascetur ridiculus mus. Sed vitae rutrum neque. </p>
+
+                        <a href="#" class="btn custom-lrnmore-btn"><span>Learn More</span></a>
+                    </div><!-- end messagebox -->
+                </div><!-- end col -->
+				
+				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                    <div class="post-media wow fadeIn">
+                        <div class="image-container position-relative">
+                            <img src="{% static 'yearbook/images/ph1.jpg' %}" alt="" class="img-fluid img-rounded">
+                            <div class="overlay top-overlay position-absolute w-100"></div>
+                            <div class="overlay bottom-overlay position-absolute w-100"></div>
+                        </div>
+                    </div><!-- end media -->
+                </div><!-- end col -->
+			</div>
+			<div class="row align-items-center">
+				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                    <div class="post-media wow fadeIn">
+                        <img src="{% static 'yearbook/images/ph2.jpg' %}" alt="" class="img-fluid img-rounded">
+                    </div><!-- end media -->
+                </div><!-- end col -->
+				
+				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                    <div class="message-box">
+                        <h2>The standard Lorem Ipsum passage, used since the 1500s</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+                        <p> Integer rutrum ligula eu dignissim laoreet. Pellentesque venenatis nibh sed tellus faucibus bibendum.</p>
+
+                        <a href="#" class="btn custom-lrnmore-btn"><span>Learn More</span></a>
+                    </div><!-- end messagebox -->
+                </div><!-- end col -->
+				
+            </div><!-- end row -->
+        </div><!-- end container -->
+    </div><!-- end section -->
+
+
+
+
+  <!-- FOOTER -->
+  <footer style="background-color: rgba(23, 38, 79, 0.9); padding: 30px 0; color: #fff; ">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <h3>Contact Us</h3>
+        <p>Email: <a href="mailto:info@example.com">info@example.com</a></p>
+        <p>Phone: +1234567890</p>
+        <p>Address: 123 Main St, City, Country</p>
+        <ul class="list-inline">
+          <li class="list-inline-item"><a href="https://facebook.com/example" target="_blank">Facebook</a></li>
+          <li class="list-inline-item"><a href="https://twitter.com/example" target="_blank">Twitter</a></li>
+          <li class="list-inline-item"><a href="https://linkedin.com/company/example" target="_blank">LinkedIn</a></li>
+        </ul>
+      </div>
+      <div class="col-md-6">
+        <h3>Location</h3>
+        <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12345.6789!2dlongitude!3dlatitude!4dzoomlevel!5d" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe> -->
+      </div>
+    </div>
+    <div class="text-center">
+      <a href="/contact" class="btn btn-primary">Contact Us</a>
+    </div>
+    <hr>
+    
+  </div>
+</footer>
+
+{% endblock %}
+
