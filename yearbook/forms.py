@@ -57,6 +57,7 @@ class StudentProfileForm(forms.ModelForm):
             'phone': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Phone'}),
             'description': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Description'}),
             'one_liner': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'One Liner'}),
+            'tags': forms.CheckboxSelectMultiple(),
         }
 
 
@@ -68,7 +69,6 @@ class AnswerForm(forms.ModelForm):
             'question_number': forms.HiddenInput(),
             'answer_text': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Answer text'})
         }
-
 AnswerFormSet = inlineformset_factory(Student, Answer, form=AnswerForm, extra=3)
 
 
@@ -82,16 +82,15 @@ def get_dynamic_answer_forms(answers=None):
             label=question,
             required=False,
             initial=initial_value,
-            widget=forms.Textarea(attrs={'class': 'form-control', 'placeholder': question})
+            widget=forms.Textarea(attrs={'class': 'form-control'})
         )
 
     return DynamicAnswerForm
-
 
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ['text']
         widgets = {
-            'text': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Write your comment here...'}),
+            'text': forms.Textarea(attrs={'class': 'form-control right-align'}),
         }
