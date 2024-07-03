@@ -3,6 +3,14 @@ from django.core.validators import MinLengthValidator
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.conf import settings
 
+
+class Tag(models.Model):
+    name = models.CharField(max_length=50, unique=True)
+    color = models.CharField(max_length=7, default='#000000')
+    
+    def __str__(self):
+        return self.name
+    
 class CustomUserManager(BaseUserManager):
     def create_user(self, student_id, email, first_name, last_name, password=None, **extra_fields):
         if not student_id:
@@ -35,6 +43,8 @@ class Student(AbstractUser):
     phone = models.CharField(max_length=12, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     one_liner = models.CharField(max_length=255, blank=True, null=True)
+    tags = models.ManyToManyField(Tag, related_name='students', blank=True)
+
 
     USERNAME_FIELD = 'student_id'
     REQUIRED_FIELDS = ['email', 'first_name', 'last_name']
@@ -62,6 +72,7 @@ class Comment(models.Model):
 
     def __str__(self):
         return f'Comment by {self.user} on {self.student}'
+    
 
 QUESTIONS = ["خنده دار ترین سوتیت چی بود؟",
 "اگر به 4 سال پیش برگردی چه کاری رو انجام نمیدی؟\n و چه کاری رو انجام میدی؟",
