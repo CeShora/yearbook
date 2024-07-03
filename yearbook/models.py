@@ -49,7 +49,7 @@ class Answer(models.Model):
     answer_text = models.TextField(blank=True, null=True)
 
     def __str__(self):
-        return f"Question: {QUESTIONS[self.question_number]}, Answer: {self.answer_text}, Student: {self.student}"
+        return f"{self.answer_text}"
 
 
 QUESTIONS = ["خنده دار ترین سوتیت چی بود؟",
@@ -59,7 +59,7 @@ QUESTIONS = ["خنده دار ترین سوتیت چی بود؟",
 "بهترین خاطره؟",
 "آخرین حرفت با همدوره ای هات؟",
 "توصیف این 4 سال با کلمات پراکنده؟",
-"بجه های 98 در جند کلمه؟",
+"بچه های دورت در جند کلمه؟",
 "دوست داری چه شغلی داشته باشی؟",
 "فکر میکنی چه درسی رو اگر تو ارائه میدادی بهتر بود؟",
 "دوست داشتی چه درسی رو پاس میکردی؟",
