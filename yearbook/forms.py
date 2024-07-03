@@ -45,7 +45,6 @@ class StudentProfileForm(forms.ModelForm):
     class Meta:
         model = Student
         fields = [
-            'student_id', 'first_name', 'last_name', 'email',
             'github_link', 'linkedin_link', 'phone', 'description', 'one_liner'
         ]
         widgets = {
@@ -72,15 +71,19 @@ class AnswerForm(forms.ModelForm):
 
 AnswerFormSet = inlineformset_factory(Student, Answer, form=AnswerForm, extra=3)
 
-def get_dynamic_answer_forms():
+
+def get_dynamic_answer_forms(answers=None):
     class DynamicAnswerForm(forms.Form):
         pass
 
     for i, question in enumerate(QUESTIONS):
+        initial_value = answers.get(f'question_{i}') if answers else None
         DynamicAnswerForm.base_fields[f'question_{i}'] = forms.CharField(
             label=question,
             required=False,
+            initial=initial_value,
             widget=forms.Textarea(attrs={'class': 'form-control', 'placeholder': question})
         )
 
     return DynamicAnswerForm
+

@@ -125,3 +125,6 @@ STATIC_URL = '/static/'
 
 AUTH_USER_MODEL = 'yearbook.Student'
 
+
+LOGIN_REDIRECT_URL = 'student_list'  
+LOGIN_URL = 'login'  

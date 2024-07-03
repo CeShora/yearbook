@@ -4,6 +4,7 @@ from django.contrib import messages
 from .models import QUESTIONS, Answer, Student
 from .forms import StudentProfileForm, AnswerFormSet, get_dynamic_answer_forms
 from .forms import StudentRegistrationForm
+from django.contrib.auth.views import LoginView
 
 def home(request):
     return render(request, "yearbook/home.html")
@@ -45,22 +46,44 @@ def student_create(request):
 
 
 @login_required
-def student_update(request, student_id):
-    student = get_object_or_404(Student, student_id=student_id)
+def student_update(request):
+    DynamicAnswerForm = get_dynamic_answer_forms()  
+    student = request.user 
+
+    answers = Answer.objects.filter(student=student)
+    answer_dict = {answer.question_number: answer for answer in answers}
+
     if request.method == 'POST':
-        student_form = StudentProfileForm(request.POST, instance=student)
-        answer_formset = AnswerFormSet(request.POST, instance=student)
-        if student_form.is_valid() and answer_formset.is_valid():
-            student_form.save()
-            answer_formset.save()
-            messages.success(request, 'Student updated successfully.')
-            return redirect('student_detail', student_id=student.student_id)
+        form = StudentProfileForm(request.POST, instance=student)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Your profile was successfully updated.')
+
+        # Process answer forms for each question
+        for i, question in enumerate(QUESTIONS):
+            answer_text = request.POST.get(f'question_{i}')
+            if answer_text:
+                if i in answer_dict:
+                    answer = answer_dict[i]
+                    answer.answer_text = answer_text
+                    answer.save()
+                else:
+                    Answer.objects.create(
+                        student=student,
+                        question_number=i,
+                        answer_text=answer_text
+                    )
+
+        return redirect('student_list')  
     else:
-        student_form = StudentProfileForm(instance=student)
-        answer_formset = AnswerFormSet(instance=student)
-    return render(request, 'yearbook/student_form.html', {
-        'student_form': student_form,
-        'answer_formset': answer_formset,
+        # Initialize profile form and answer forms
+        form = StudentProfileForm(instance=student)
+        initial_answers = {f'question_{i}': answer_dict[i].answer_text if i in answer_dict else '' for i, _ in enumerate(QUESTIONS)}
+        answer_form = DynamicAnswerForm(initial=initial_answers)
+
+    return render(request, 'yearbook/student_update.html', {
+        'form': form,
+        'answer_form': answer_form,
     })
 
 @login_required
@@ -71,3 +94,6 @@ def student_delete(request, student_id):
         messages.success(request, 'Student deleted successfully.')
         return redirect('student_list')
     return render(request, 'yearbook/student_confirm_delete.html', {'student': student})
+
+class StudentLoginView(LoginView):
+    template_name = 'yearbook/login.html'
