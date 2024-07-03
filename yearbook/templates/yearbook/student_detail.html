@@ -5,7 +5,36 @@
 
 {% block extra_css %}
     <style>
+    
+        .badge {
+            display: inline-block;
+            padding: 8px 10px !important;
+            font-weight: bold !important;
+            font-size: 13px !important;
+        }
+
+        .rainbow-badge {
+            display: inline-block;
+            padding: 8px 10px !important; /* Increase padding for a larger badge */
+            font-weight: bold !important;
+            font-size: 13px !important;
+            animation: rainbow 5s infinite; /* Change duration as desired */
+        }
         
+        @keyframes rainbow {
+            0%, 10% { background-color: red; color: #fff ; }
+            10%, 20% { background-color: orange; color: #fff ;}
+            20%, 30% { background-color: yellow; color: black ;}
+            30%, 40% { background-color: #79F701; color: black ;}
+            40%, 50% { background-color: green; color: #fff }
+            50%, 60% { background-color: cyan; color: black ;}
+            60%, 70% { background-color: blue; color: #fff ;}
+            70%, 80% { background-color: violet; color: black ;}
+            80%, 90% { background-color: purple; color: #fff ;}
+            90%, 100% { background-color: pink; color: black ;}
+        }
+        
+
     .right-align {
         text-align: right;
     }
@@ -154,6 +183,17 @@
                         <h5 class="right-align light-blue">{{student.one_liner}}</h5>
                     {% endif %}
 
+                    {% comment %} <hr> {% endcomment %}
+                    {% comment %} <h3>Tags</h3> {% endcomment %}
+                    <div>
+                        {% for tag in student.tags.all %}
+                            {% if tag.name == 'Owner' %}
+                                <span class="badge rainbow-badge">Owner</span>
+                            {% else %}
+                                <span class="badge" style="background-color: {{ tag.color }}!important;">{{ tag.name }}</span>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
                     <hr>
                     <h1>Contact info</h1>
                     <ul class="light-blue">
@@ -183,7 +223,7 @@
                 <div class="col-md-6 right-align">
                     {% for answer in answers %}
                         {% if forloop.counter|divisibleby:2 %}
-                            <h5 class="light-blue">:{{ questions|index:answer.question_number }}</h5>
+                            <h5 class="light-blue">{{ questions|index:answer.question_number }}</h5>
                             {% if answer.answer_text %}
                                 <p>{{ answer.answer_text }}</p>
                             {% else %}
@@ -200,7 +240,7 @@
                     {% endif %}
                     {% for answer in answers %}
                         {% if not forloop.counter|divisibleby:2 %}
-                            <h5 class="light-blue">:{{ questions|index:answer.question_number }}</h5>
+                            <h5 class="light-blue">{{ questions|index:answer.question_number }}</h5>
                             {% if answer.answer_text %}
                                 <p>{{ answer.answer_text }}</p>
                             {% else %}
@@ -213,31 +253,34 @@
             <div class='row'>
 
                 <hr>
-                <h3>Comments</h3>
+                <h3 class='right-align'>:کامنت ها</h3>
                 {% if comments %}
-                    <ul class="list-unstyled">
+                    <ul class="list-unstyled right-align">
                         {% for comment in comments %}
                             <li>
-                                <strong>{{ comment.user.get_full_name }}</strong>
-                                <p>{{ comment.text }}</p>
+                                <strong >{{ comment.user.get_full_name }}</strong>
                                 <small>{{ comment.created_at|date }}</small>
+                                <p>{{ comment.text }}</p>
+                                
                             </li>
                         {% endfor %}
                     </ul>
                 {% else %}
-                    <p>No comments yet.</p>
+                    <p class='right-align light-blue'>هنوز کامنتی اضافه نشده</p>
                 {% endif %}
                 
                 <hr>
-                <h3>Add a Comment</h3>
+                <h3 class='right-align'>کامنت اضافه کن</h3>
                 {% if user.is_authenticated %}
-                    <form method="post" action="{% url 'post_comment' student_id=student.student_id %}">
+                <div class="mb-3 right-align">
+                    <form method="post" action="{% url 'post_comment' student_id=student.student_id %}" class="needs-validation" novalidate>
                         {% csrf_token %}
                         {{ comment_form.as_p }}
-                        <button type="submit" class="btn btn-primary">Post Comment</button>
+                        <button type="submit" class="btn btn-primary mt-3">اضافه کردن کامنت</button>
                     </form>
+                </div>
                 {% else %}
-                    <p>You must be <a href="{% url 'login' %}?next={% url 'student_detail' student_id=student.student_id %}">logged in</a> to post a comment.</p>
+                    <p class='right-align light-blue'>شما باید <a href="{% url 'login' %}?next={% url 'student_detail' student_id=student.student_id %}">لاگین کرده باشید</a> تا بتوانید کامنت بگذارید</p>
                 {% endif %}
             </div>
         </div>
