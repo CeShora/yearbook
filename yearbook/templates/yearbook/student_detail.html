@@ -172,7 +172,7 @@
 
                     </ul>
                 </div>
-                <div class="col-12">
+                <div class="col-12 right-align">
                     {% if student.description %}
                         <p>{{student.description}}</p>
                     {% endif %}
@@ -180,17 +180,32 @@
                 </div>
             </div>
             <div class="row"> 
-                <div class="col-lg-12 right-align">
+                <div class="col-md-6 right-align">
+                    {% for answer in answers %}
+                        {% if forloop.counter|divisibleby:2 %}
+                            <h5 class="light-blue">:{{ questions|index:answer.question_number }}</h5>
+                            {% if answer.answer_text %}
+                                <p>{{ answer.answer_text }}</p>
+                            {% else %}
+                                <p>---</p>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+    
+                <div class="col-md-6 right-align">
                     {% if answers %}
                         <h3 class="mid-blue">:سوالات</h3>
+                        <p class="mid-blue">{{answers.count}}/{{num_questions}} </p>
                     {% endif %}
-
                     {% for answer in answers %}
-                        <h5 class="light-blue">:{{ questions|index:answer.question_number }}</h5>
-                        {% if student.description %}
-                            <p>{{answer}}</p>
-                        {% else %}
-                            <p> --- </p>
+                        {% if not forloop.counter|divisibleby:2 %}
+                            <h5 class="light-blue">:{{ questions|index:answer.question_number }}</h5>
+                            {% if answer.answer_text %}
+                                <p>{{ answer.answer_text }}</p>
+                            {% else %}
+                                <p>---</p>
+                            {% endif %}
                         {% endif %}
                     {% endfor %}
                 </div>
