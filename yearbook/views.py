@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import QUESTIONS, Student
 from .forms import StudentProfileForm, AnswerFormSet
+from .forms import StudentRegistrationForm
 
 def home(request):
     return render(request, "yearbook/home.html")
@@ -16,27 +17,18 @@ def student_detail(request, student_id):
     answers = student.answers.all()  # Fetch all related answers for the student
     return render(request, 'yearbook/student_detail.html', {'student': student, 'answers': answers, 'questions': QUESTIONS})
 
-@login_required
+
 def student_create(request):
     if request.method == 'POST':
-        student_form = StudentProfileForm(request.POST)
-        answer_formset = AnswerFormSet(request.POST)
-        if student_form.is_valid() and answer_formset.is_valid():
-            student = student_form.save()
-            answers = answer_formset.save(commit=False)
-            for answer in answers:
-                answer.student = student
-                answer.save()
+        form = StudentRegistrationForm(request.POST)
+        if form.is_valid():
+            form.save()
             messages.success(request, 'Student created successfully.')
-            return redirect('student_list')  # Redirect to student list upon successful form submission
+            return redirect('student_list')
     else:
-        student_form = StudentProfileForm()
-        answer_formset = AnswerFormSet()
-    return render(request, 'yearbook/student_form.html', {
-        'student_form': student_form,
-        'answer_formset': answer_formset,
-    })
-
+        form = StudentRegistrationForm()
+    return render(request, 'yearbook/student_create.html', {'form': form})
+    
 @login_required
 def student_update(request, student_id):
     student = get_object_or_404(Student, student_id=student_id)
