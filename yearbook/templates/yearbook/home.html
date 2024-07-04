@@ -4,7 +4,10 @@
 {% block extra_css %}
     <style>
 
-        
+      
+    .right-align {
+      text-align: right !important;
+  }  
 
     #overviews {
         background-color: rgba(23, 38, 79, 0.7); /* Adjust the transparency as needed */
@@ -73,6 +76,22 @@
     background-color: rgb(23, 38, 79);
     }
 
+    .dropdown-item{
+      color: #fff !important;
+    }
+
+    .custom-dropdown {
+      background-color: rgb(38,66,145) !important; /* Change this to the color you want */
+    }
+    
+    .custom-dropdown .dropdown-item {
+      background-color: rgb(38,66,145) !important; /* Change this to the color you want */
+    }
+    
+    .custom-dropdown .dropdown-item:hover {
+      background-color: rgb(38,66,145) !important; /* Change this to the hover color you want */
+    }
+
     .carousel-item {
       height: 700px; /* Adjust the height as needed */
     }
@@ -111,14 +130,19 @@
             <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="/">Home</a>
             </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle dropdown-item" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Yearbook
+              </a>
+              <ul class="dropdown-menu custom-dropdown">
+                <li><a class="dropdown-item" href="/students">Ce 98</a></li>
+              </ul>
+            </li>
             <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/yearbook/ce/98">Yearbook98</a>
+            <a class="nav-link active" aria-current="page" href="#MemoirAlcove">Memoir Alcove</a>
             </li>
             <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="/about">About</a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/Gallery">Gallery</a>
             </li>
             <li class="nav-item">
             <a class="btn btn-login" href="/login">Login</a>
@@ -176,55 +200,53 @@
         <div class="container">
             <div class="section-title row text-center">
                 <div class="col-md-8 offset-md-2">
-                    <h3>About</h3>
-                    <p class="lead">Lorem Ipsum dolroin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem!</p>
+                    <h2 id='MemoirAlcove'>Memoir Alcove</h2>
+                    <p class="lead">A Sanctuary of Shared Journeys</p>
                 </div>
             </div><!-- end title -->
         
             <div class="row align-items-center">
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
                     <div class="message-box">
-                        <h4>TEST</h4>
-                        <h2>TITLE </h2>
-                        <p>Quisque eget nisl id nulla sagittis auctor quis id. Aliquam quis vehicula enim, non aliquam risus. Sed a tellus quis mi rhoncus dignissim.</p>
-
-                        <p> Integer rutrum ligula eu dignissim laoreet. Pellentesque venenatis nibh sed tellus faucibus bibendum. Sed fermentum est vitae rhoncus molestie. Cum sociis natoque penatibus et magnis montes, nascetur ridiculus mus. Sed vitae rutrum neque. </p>
-
+                        <h2>Remembrance Hall  </h2>
+                        <p> A place where we revisit our everyday friends, companions, and familiar spots. It's also where we honor those who helped create memorable events, where we learned, met new people, and formed lasting connections.</p>
+                        <p class='right-align'> یه مکان برای اینکه توش یه بار دیگه دوستای روزمره، همراهان و مکان‌های آشنا رو دوره کنیم. جایی که از کسایی که به خلق رویدادهای به‌یادماندنی کمک کردند، تقدیر می‌کنیم. ایونت هایی توش یاد گرفتیم، با افراد جدید آشنا شدیم و ارتباط های پایدار برقرار کردیم</p>
                         <a href="#" class="btn custom-lrnmore-btn"><span>Learn More</span></a>
-                    </div><!-- end messagebox -->
-                </div><!-- end col -->
+                    </div>
+                </div>
 				
 				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                    <div class="post-media wow fadeIn">
-                        <div class="image-container position-relative">
-                            <img src="{% static 'yearbook/images/ph1.jpg' %}" alt="" class="img-fluid img-rounded">
-                            <div class="overlay top-overlay position-absolute w-100"></div>
-                            <div class="overlay bottom-overlay position-absolute w-100"></div>
-                        </div>
-                    </div><!-- end media -->
-                </div><!-- end col -->
+            <div class="post-media wow fadeIn">
+                <div class="image-container position-relative">
+                    <img src="{% static 'yearbook/images/ph1.jpg' %}" alt="" class="img-fluid img-rounded">
+                    <div class="overlay top-overlay position-absolute w-100"></div>
+                    <div class="overlay bottom-overlay position-absolute w-100"></div>
+                </div>
+            </div>
+        </div>
 			</div>
 			<div class="row align-items-center">
 				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                    <div class="post-media wow fadeIn">
-                        <img src="{% static 'yearbook/images/ph2.jpg' %}" alt="" class="img-fluid img-rounded">
-                    </div><!-- end media -->
-                </div><!-- end col -->
+            <div class="post-media wow fadeIn">
+                <img src="{% static 'yearbook/images/ph2.jpg' %}" alt="" class="img-fluid img-rounded">
+            </div>
+        </div>
 				
 				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
                     <div class="message-box">
-                        <h2>The standard Lorem Ipsum passage, used since the 1500s</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        <h2>Reminiscence Wall</h2>
+                        <p>
+                          A place where people can leave behind their memory tokens and see the memories of others, creating a collective tapestry of shared experiences and cherished moments.</p>
 
-                        <p> Integer rutrum ligula eu dignissim laoreet. Pellentesque venenatis nibh sed tellus faucibus bibendum.</p>
+                        <p class='right-align'>یک مکان برای اینکه خاطرات خودتون از این زمانی که با هم بودیم را به جا بذارید و از خاطرات بقیه بازدید کنید، تا آرشیو مشترک از تجربیات  و لحظات عزیز برامون باقی بمونه</p>
 
                         <a href="#" class="btn custom-lrnmore-btn"><span>Learn More</span></a>
-                    </div><!-- end messagebox -->
-                </div><!-- end col -->
+                    </div>
+                </div>
 				
-            </div><!-- end row -->
-        </div><!-- end container -->
-    </div><!-- end section -->
+            </div>
+        </div>
+    </div>
 
 
 
