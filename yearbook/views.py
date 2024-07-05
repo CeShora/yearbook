@@ -18,7 +18,8 @@ def remembrancehall(request):
     return render(request, "yearbook/remembrancehall.html")
 
 def reminiscencewall(request):
-    return render(request, "yearbook/reminiscencewall.html")
+    answers = Answer.objects.filter(question_number=0)
+    return render(request, "yearbook/reminiscencewall.html", {'answers': answers})
 
 
 def student_list(request):
