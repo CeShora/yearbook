@@ -78,34 +78,67 @@
 
     }
 
-
-    .navbar {
-    background-color: rgb(23, 38, 79); 
+    .nav-item{
+        padding: 0 5px; 
+      }
+      
+      .navbar .btn-login{
+          background-color: rgb(38, 66, 145);
+          border-color: rgb(38, 66, 145) !important;
+          transition: background-color 0.3s, border-color 0.3s;
+          color: #fff;  
+          }
+            
+        .navbar .btn-login:active,
+        .navbar .btn-login:hover,
+        .navbar .btn-login:focus
+        .navbar .btn-login{
+        background-color: rgb(56, 95, 194) !important;
+        border-color: rgb(38, 66, 145) !important;
+        }
+    
+        .custom-lrnmore-btn {
+        background-color: rgb(56, 95, 194) !important;
+        border-color: rgb(38, 66, 145) !important;
+        color: #fff !important; /* Ensure the text is visible */
+        transition: background-color 0.3s, border-color 0.3s;
     }
-
-    .navbar .btn-login:active,
-    .navbar .btn-login:hover,
-    .navbar .btn-login:focus
-    .navbar .btn-login{
-    background-color: rgb(56, 95, 194) !important;
-    border-color: rgb(38, 66, 145) !important;
-    }
-
-    .custom-lrnmore-btn {
-    background-color: rgb(56, 95, 194) !important;
-    border-color: rgb(38, 66, 145) !important;
-    color: #fff !important; 
-    transition: background-color 0.3s, border-color 0.3s ;
-    }
-
+    
     .custom-lrnmore-btn:hover,
     .custom-lrnmore-btn:focus,
     .custom-lrnmore-btn:active {
         background-color: rgb(38, 66, 145) !important;
         border-color: rgb(28, 50, 109) !important;
-        color: #fff !important; /* Ensure the text is visible */
+        color: #fff !important; 
     }
-
+    
+    .white{
+      color: white !important;
+    }
+    
+    .navbar {
+    background-color: rgb(23, 38, 79);
+    }
+    
+    .dropdown-item{
+      color: #fff !important;
+    }
+    
+    .custom-dropdown {
+      background-color: rgb(38,66,145) !important; /* Change this to the color you want */
+    }
+    
+    .custom-dropdown .dropdown-item {
+      background-color: rgb(38,66,145) !important; /* Change this to the color you want */
+    }
+    
+    .custom-dropdown .dropdown-item:hover {
+      background-color: rgb(38,66,145) !important; /* Change this to the hover color you want */
+    }
+    
+        .navbar {
+        background-color: rgb(23, 38, 79);
+        }
 
     </style>
 {% endblock %}
@@ -124,23 +157,44 @@
                 <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="/">Home</a>
                 </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle dropdown-item" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Yearbook
+                  </a>
+                  <ul class="dropdown-menu custom-dropdown">
+                    <li><a class="dropdown-item" href="/students">Ce 98</a></li>
+                  </ul>
+                </li>
                 <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/yearbook/ce/98">Yearbook98</a>
+                <a class="nav-link active" aria-current="page" href="/#MemoirAlcove">Memoir Alcove</a>
                 </li>
                 <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="/about">About</a>
                 </li>
-                <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/Gallery">Gallery</a>
+                {% if user.is_authenticated %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle white" href="#"  role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        {{ user.first_name }} {{ user.last_name }}
+                    </a>
+                    <ul class="dropdown-menu custom-dropdown dropdown-menu-end" >
+                        <li><a class="dropdown-item" href="/student/{{user.student_id}}">Profile</a></li>
+                        <li><a class="dropdown-item" href="/student/update">Edit</a></li>
+                    </ul>
                 </li>
+                {% else %}
                 <li class="nav-item">
                 <a class="btn btn-login" href="/login">Login</a>
                 </li>
+                <li class="nav-item">
+                <a class="btn btn-login" href="/student/new">Signup</a>
+                </li>
+                {% endif %}
             </ul>
             </div>
         </div>
-    </nav>
-
+      </nav>
+    
+      
     <div class="all-title-box">
         <div class="text-center">
             <h1>Class of 98</h1>
@@ -155,7 +209,7 @@
                                 <h5 class="card-title right-align">🎓{{ answer.student.first_name }} {{ answer.student.last_name }}🎓
                                     {% for tag in answer.student.tags.all %}
                                         {% if tag.name == 'Owner' %}
-                                            <span class="badge rainbow-badge tooltip">Owner</span>
+                                            <span class="badge rainbow-badge">Owner</span>
                                         {% else %}
                                             <span class="badge" style="background-color: {{ tag.color }};" data-toggle="tooltip" title="{{tag.desc}}">{{ tag.name }}</span>
                                         {% endif %}
@@ -171,5 +225,6 @@
             <p>No answers found for this question.</p>
         {% endif %}
     </div>
+    
     {% endblock %}
     

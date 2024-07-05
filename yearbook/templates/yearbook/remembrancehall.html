@@ -1,1 +1,205 @@
-Hello from remembrancehall.html
+{% extends 'base.html' %}
+{% block title %}Remembrance Hall{% endblock %}
+{% load static %}
+{% load custom_tags %}
+
+{% block extra_css %}
+    <style>
+        .nav-item{
+        padding: 0 5px; 
+      }
+      
+      .navbar .btn-login{
+          background-color: rgb(38, 66, 145);
+          border-color: rgb(38, 66, 145) !important;
+          transition: background-color 0.3s, border-color 0.3s;
+          color: #fff;  
+          }
+            
+        .navbar .btn-login:active,
+        .navbar .btn-login:hover,
+        .navbar .btn-login:focus
+        .navbar .btn-login{
+        background-color: rgb(56, 95, 194) !important;
+        border-color: rgb(38, 66, 145) !important;
+        }
+    
+        .custom-lrnmore-btn {
+        background-color: rgb(56, 95, 194) !important;
+        border-color: rgb(38, 66, 145) !important;
+        color: #fff !important; /* Ensure the text is visible */
+        transition: background-color 0.3s, border-color 0.3s;
+    }
+    
+    .custom-lrnmore-btn:hover,
+    .custom-lrnmore-btn:focus,
+    .custom-lrnmore-btn:active {
+        background-color: rgb(38, 66, 145) !important;
+        border-color: rgb(28, 50, 109) !important;
+        color: #fff !important; 
+    }
+    
+    .white{
+      color: white !important;
+    }
+    
+    .navbar {
+    background-color: rgb(23, 38, 79);
+    }
+    
+    .dropdown-item{
+      color: #fff !important;
+    }
+    
+    .custom-dropdown {
+      background-color: rgb(38,66,145) !important; /* Change this to the color you want */
+    }
+    
+    .custom-dropdown .dropdown-item {
+      background-color: rgb(38,66,145) !important; /* Change this to the color you want */
+    }
+    
+    .custom-dropdown .dropdown-item:hover {
+      background-color: rgb(38,66,145) !important; /* Change this to the hover color you want */
+    }
+    
+    .navbar {
+    background-color: rgb(23, 38, 79);
+    }
+    
+    .badge {
+        display: inline-block;
+        padding: 8px 10px !important;
+        font-weight: bold !important;
+        font-size: 13px !important;
+        position: relative;
+    }
+    
+
+    .rainbow-badge {
+        display: inline-block;
+        padding: 8px 10px !important; /* Increase padding for a larger badge */
+        font-weight: bold !important;
+        font-size: 13px !important;
+        animation: rainbow 5s infinite; /* Change duration as desired */
+    }
+    
+    @keyframes rainbow {
+        0%, 10% { background-color: red; color: #fff ; }
+        10%, 20% { background-color: orange; color: #fff ;}
+        20%, 30% { background-color: yellow; color: black ;}
+        30%, 40% { background-color: #79F701; color: black ;}
+        40%, 50% { background-color: green; color: #fff }
+        50%, 60% { background-color: cyan; color: black ;}
+        60%, 70% { background-color: blue; color: #fff ;}
+        70%, 80% { background-color: violet; color: black ;}
+        80%, 90% { background-color: purple; color: #fff ;}
+        90%, 100% { background-color: pink; color: black ;}
+    }
+    </style>
+{% endblock %}
+
+{% block content %}
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg sticky-top" data-bs-theme="dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">Autbase</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/">Home</a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle dropdown-item" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Yearbook
+                  </a>
+                  <ul class="dropdown-menu custom-dropdown">
+                    <li><a class="dropdown-item" href="/students">Ce 98</a></li>
+                  </ul>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/#MemoirAlcove">Memoir Alcove</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/about">About</a>
+                </li>
+                {% if user.is_authenticated %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle white" href="#"  role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        {{ user.first_name }} {{ user.last_name }}
+                    </a>
+                    <ul class="dropdown-menu custom-dropdown dropdown-menu-end" >
+                        <li><a class="dropdown-item" href="/student/{{user.student_id}}">Profile</a></li>
+                        <li><a class="dropdown-item" href="/student/update">Edit</a></li>
+                    </ul>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                <a class="btn btn-login" href="/login">Login</a>
+                </li>
+                <li class="nav-item">
+                <a class="btn btn-login" href="/student/new">Signup</a>
+                </li>
+                {% endif %}
+            </ul>
+            </div>
+        </div>
+      </nav>
+    
+      
+
+    <div class="all-title-box">
+        <div class="text-center">
+            <h1>Class of 98</h1>
+        </div>
+    </div>	
+
+{% if students %}
+            <ul>
+                {% for student in students %}
+                    <li>
+                        {{ student.first_name }} {{ student.last_name }} ({{ student.student_id }})
+                        <ul>
+                            {% for tag in student.tags.all %}
+                                {% if tag.name == 'Owner' %}
+                                    <span class="badge rainbow-badge" data-toggle="tooltip" title="{{tag.desc}}">Owner</span>
+                                {% else %}
+                                    <span class="badge" style="background-color: {{ tag.color }};" data-toggle="tooltip" title="{{tag.desc}}">{{ tag.name }}</span>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No students found with tags.</p>
+        {% endif %}
+        
+  <!-- FOOTER -->
+  <footer style="background-color: rgba(23, 38, 79, 0.9); padding: 30px 0; color: #fff; ">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <h3>📞Contact Me📞</h3>
+          <p>📩 Primary Email: <a href="mailto:admin@autbase.ir">admin@autbase.ir</a></p>
+          <p>📩 Secondary Email: <a href="mailto:neginkheirmand@gmail.com">neginkheirmand@gmail.com</a></p>
+          <p>👩‍💻Source Code Repository: <a href="https://github.com/CeShora/yearbook">github.com/CeShora/yearbook</a></p>
+          <ul class="list-inline">
+            <li class="list-inline-item"><a href="https://github.com/neginkheirmand" target="_blank">github</a></li>
+            <li class="list-inline-item"><a href="https://t.me/neginkheirmand" target="_blank">Telegram</a></li>
+            <li class="list-inline-item"><a href="https://www.linkedin.com/in/neginkheirmand" target="_blank">LinkedIn</a></li>
+          </ul>
+        </div>
+        <div class="col-md-6">
+          <h3>🎓New Grads🎓</h3>
+          <p>💬 Contact either of the emails if you want a new section for your graduated class in the site. I will gladly add it😊.</p>
+          <p>#️⃣ If you want your very own graduation site, you can find the source code of the project in the mentioned links. </p>
+        </div>
+        <hr>
+        <p class='text-center'>🎓🎓🎓</p>
+      </div>
+{% endblock %}

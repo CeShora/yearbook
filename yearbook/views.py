@@ -15,7 +15,8 @@ def about(request):
     return render(request, "yearbook/about.html")
 
 def remembrancehall(request):
-    return render(request, "yearbook/remembrancehall.html")
+    students = Student.objects.filter(tags__isnull=False).distinct()
+    return render(request, "yearbook/remembrancehall.html",{'students': students})
 
 def reminiscencewall(request):
     answers = Answer.objects.filter(question_number=0)
