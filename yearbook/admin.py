@@ -8,7 +8,7 @@ class AnswerInline(admin.TabularInline):
 
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
-    list_display = ('name', 'color')
+    list_display = ('name', 'color', 'desc')
     search_fields = ('name',)
 
 @admin.register(Student)

@@ -11,7 +11,9 @@
             padding: 8px 10px !important;
             font-weight: bold !important;
             font-size: 13px !important;
+            position: relative;
         }
+        
 
         .rainbow-badge {
             display: inline-block;
@@ -33,7 +35,7 @@
             80%, 90% { background-color: purple; color: #fff ;}
             90%, 100% { background-color: pink; color: black ;}
         }
-        
+     
 
     .right-align {
         text-align: right;
@@ -188,9 +190,9 @@
                     <div>
                         {% for tag in student.tags.all %}
                             {% if tag.name == 'Owner' %}
-                                <span class="badge rainbow-badge">Owner</span>
+                                <span class="badge rainbow-badge tooltip">Owner</span>
                             {% else %}
-                                <span class="badge" style="background-color: {{ tag.color }}!important     ;">{{ tag.name }}</span>
+                                <span class="badge" style="background-color: {{ tag.color }};" data-toggle="tooltip" title="{{tag.desc}}">{{ tag.name }}</span>
                             {% endif %}
                         {% endfor %}
                     </div>

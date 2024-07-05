@@ -4,7 +4,7 @@
 {% block extra_css %}
     <style>
         .row {
-            padding: 1% 3% 1% 3%;
+            padding: 1% 3% 1% 3% !important   ;
         }
 
         .students {
@@ -83,27 +83,62 @@
         }
 
         
+    .nav-item{
+    padding: 0 5px; 
+  }
+  
+  .navbar .btn-login{
+      background-color: rgb(38, 66, 145);
+      border-color: rgb(38, 66, 145) !important;
+      transition: background-color 0.3s, border-color 0.3s;
+      color: #fff;  
+      }
+        
     .navbar .btn-login:active,
     .navbar .btn-login:hover,
     .navbar .btn-login:focus
     .navbar .btn-login{
-    background-color: rgb(56, 95, 194);
-    border-color: rgb(38, 66, 145);
+    background-color: rgb(56, 95, 194) !important;
+    border-color: rgb(38, 66, 145) !important;
     }
 
     .custom-lrnmore-btn {
-    background-color: rgb(56, 95, 194);
-    border-color: rgb(38, 66, 145);
-    color: #fff; /* Ensure the text is visible */
+    background-color: rgb(56, 95, 194) !important;
+    border-color: rgb(38, 66, 145) !important;
+    color: #fff !important; /* Ensure the text is visible */
     transition: background-color 0.3s, border-color 0.3s;
 }
 
 .custom-lrnmore-btn:hover,
 .custom-lrnmore-btn:focus,
 .custom-lrnmore-btn:active {
-    background-color: rgb(38, 66, 145);
-    border-color: rgb(28, 50, 109);
-    color: #fff; /* Ensure the text is visible */
+    background-color: rgb(38, 66, 145) !important;
+    border-color: rgb(28, 50, 109) !important;
+    color: #fff !important; 
+}
+
+.white{
+  color: white !important;
+}
+
+.navbar {
+background-color: rgb(23, 38, 79);
+}
+
+.dropdown-item{
+  color: #fff !important;
+}
+
+.custom-dropdown {
+  background-color: rgb(38,66,145) !important; /* Change this to the color you want */
+}
+
+.custom-dropdown .dropdown-item {
+  background-color: rgb(38,66,145) !important; /* Change this to the color you want */
+}
+
+.custom-dropdown .dropdown-item:hover {
+  background-color: rgb(38,66,145) !important; /* Change this to the hover color you want */
 }
 
     .navbar {
@@ -136,7 +171,7 @@
                   </ul>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#MemoirAlcove">Memoir Alcove</a>
+                <a class="nav-link active" aria-current="page" href="/#MemoirAlcove">Memoir Alcove</a>
                 </li>
                 <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="/about">About</a>
