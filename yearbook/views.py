@@ -11,6 +11,16 @@ from django.contrib.auth.views import LoginView
 def home(request):
     return render(request, "yearbook/home.html")
 
+def about(request):
+    return render(request, "yearbook/about.html")
+
+def remembrancehall(request):
+    return render(request, "yearbook/remembrancehall.html")
+
+def reminiscencewall(request):
+    return render(request, "yearbook/reminiscencewall.html")
+
+
 def student_list(request):
     students = Student.objects.all()
     return render(request, 'yearbook/student_list.html', {'students': students})
