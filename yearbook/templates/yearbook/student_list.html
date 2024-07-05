@@ -127,18 +127,38 @@
                 <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="/">Home</a>
                 </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle dropdown-item" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Yearbook
+                  </a>
+                  <ul class="dropdown-menu custom-dropdown">
+                    <li><a class="dropdown-item" href="/students">Ce 98</a></li>
+                  </ul>
+                </li>
                 <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/yearbook/ce/98">Yearbook98</a>
+                <a class="nav-link active" aria-current="page" href="#MemoirAlcove">Memoir Alcove</a>
                 </li>
                 <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="/about">About</a>
                 </li>
-                <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/Gallery">Gallery</a>
+                {% if user.is_authenticated %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle white" href="#"  role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        {{ user.first_name }} {{ user.last_name }}
+                    </a>
+                    <ul class="dropdown-menu custom-dropdown dropdown-menu-end" >
+                        <li><a class="dropdown-item" href="/student/{{user.student_id}}">Profile</a></li>
+                        <li><a class="dropdown-item" href="/student/update">Edit</a></li>
+                    </ul>
                 </li>
+                {% else %}
                 <li class="nav-item">
                 <a class="btn btn-login" href="/login">Login</a>
                 </li>
+                <li class="nav-item">
+                <a class="btn btn-login" href="/student/new">Signup</a>
+                </li>
+                {% endif %}
             </ul>
             </div>
         </div>

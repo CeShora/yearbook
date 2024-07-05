@@ -1,7 +1,128 @@
 {% extends 'base.html' %}
 {% block title %}Update Profile{% endblock %}
 
+
+{% block extra_css %}
+    <style>
+
+      
+    .right-align {
+      text-align: right !important;
+  }  
+    .nav-item{
+        padding: 0 5px; 
+    
+    }
+  
+  .navbar .btn-login{
+      background-color: rgb(38, 66, 145);
+      border-color: rgb(38, 66, 145);
+      transition: background-color 0.3s, border-color 0.3s;
+      color: #fff;  
+      }
+  
+      
+      .navbar .btn-login:active,
+      .navbar .btn-login:hover,
+      .navbar .btn-login:focus{
+        background-color: rgb(56, 95, 194);
+        border-color: rgb(38, 66, 145); /* Border color on hover */
+        color: #fff; 
+      }
+  
+  
+      .custom-lrnmore-btn {
+      background-color: rgb(56, 95, 194) !important;
+      border-color: rgb(38, 66, 145) !important;
+      color: #fff !important; 
+      transition: background-color 0.3s, border-color 0.3s !important;
+  }
+  
+      .custom-lrnmore-btn:hover,
+      .custom-lrnmore-btn:focus,
+      .custom-lrnmore-btn:active {
+          background-color: rgb(38, 66, 145) !important;
+          border-color: rgb(28, 50, 109) !important;
+          color: #fff !important; 
+      }
+  
+      .white{
+        color: white !important;
+      }
+  
+      .navbar {
+      background-color: rgb(23, 38, 79);
+      }
+  
+      .dropdown-item{
+        color: #fff !important;
+      }
+  
+      .custom-dropdown {
+        background-color: rgb(38,66,145) !important; /* Change this to the color you want */
+      }
+      
+      .custom-dropdown .dropdown-item {
+        background-color: rgb(38,66,145) !important; /* Change this to the color you want */
+      }
+      
+      .custom-dropdown .dropdown-item:hover {
+        background-color: rgb(38,66,145) !important; /* Change this to the hover color you want */
+      }
+    </style>
+{% endblock %}
+
+  
+
 {% block content %}
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg sticky-top" data-bs-theme="dark">
+<div class="container-fluid">
+    <a class="navbar-brand" href="/">Autbase</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="/">Home</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle dropdown-item" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Yearbook
+          </a>
+          <ul class="dropdown-menu custom-dropdown">
+            <li><a class="dropdown-item" href="/students">Ce 98</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="#MemoirAlcove">Memoir Alcove</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="/about">About</a>
+        </li>
+        {% if user.is_authenticated %}
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle white" href="#"  role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                {{ user.first_name }} {{ user.last_name }}
+            </a>
+            <ul class="dropdown-menu custom-dropdown dropdown-menu-end" >
+                <li><a class="dropdown-item" href="/student/{{user.student_id}}">Profile</a></li>
+                <li><a class="dropdown-item" href="/student/update">Edit</a></li>
+            </ul>
+        </li>
+        {% else %}
+        <li class="nav-item">
+        <a class="btn btn-login" href="/login">Login</a>
+        </li>
+        <li class="nav-item">
+        <a class="btn btn-login" href="/student/new">Signup</a>
+        </li>
+        {% endif %}
+    </ul>
+    </div>
+</div>
+</nav>
     <div class="container">
         <h2>Update Profile and Answers</h2>
         <form method="post">
