@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-6trrztgx_5^@rkimd5#+i6)9!!+y_ae#f5zlm2!o)g)aj(iyiw
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['yearbook.darkube.app','autbase.ir']
 
 
 # Application definition
