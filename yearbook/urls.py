@@ -2,6 +2,7 @@
 
 from django.urls import path
 from . import views
+from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
     path('', views.home, name='home'), #TODO ADD HALL OF FAME, GALLERY, CLEAN A BIT
@@ -14,7 +15,8 @@ urlpatterns = [
     path('student/<str:student_id>/', views.student_detail, name='student_detail'), # ADD THE IMAGE LATER
     path('student/<int:student_id>/comment/', views.PostCommentView.as_view(), name='post_comment'),
     # path('student/<str:student_id>/delete/', views.student_delete, name='student_delete'),
-    path('login/', views.StudentLoginView.as_view(), name='login') # MAKE IT PRETTIER
+    path('login/', views.StudentLoginView.as_view(), name='login'), # MAKE IT PRETTIER
+    path('logout/', LogoutView.as_view(), name='logout'),
 ]
 
 
