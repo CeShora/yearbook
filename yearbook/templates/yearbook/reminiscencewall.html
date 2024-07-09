@@ -179,6 +179,8 @@
                     <ul class="dropdown-menu custom-dropdown dropdown-menu-end" >
                         <li><a class="dropdown-item" href="/student/{{user.student_id}}">Profile</a></li>
                         <li><a class="dropdown-item" href="/student/update">Edit</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
                     </ul>
                 </li>
                 {% else %}
@@ -236,7 +238,7 @@
           <p>📩 Secondary Email: <a href="mailto:neginkheirmand@gmail.com">neginkheirmand@gmail.com</a></p>
           <p>👩‍💻Source Code Repository: <a href="https://github.com/CeShora/yearbook">github.com/CeShora/yearbook</a></p>
           <ul class="list-inline">
-            <li class="list-inline-item"><a href="https://github.com/neginkheirmand" target="_blank">github</a></li>
+            <li class="list-inline-item"><a href="https://github.com/neginkheirmand" target="_blank">Github</a></li>
             <li class="list-inline-item"><a href="https://t.me/neginkheirmand" target="_blank">Telegram</a></li>
             <li class="list-inline-item"><a href="https://www.linkedin.com/in/neginkheirmand" target="_blank">LinkedIn</a></li>
           </ul>

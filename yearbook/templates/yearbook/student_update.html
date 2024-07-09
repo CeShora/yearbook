@@ -109,6 +109,9 @@
             <ul class="dropdown-menu custom-dropdown dropdown-menu-end" >
                 <li><a class="dropdown-item" href="/student/{{user.student_id}}">Profile</a></li>
                 <li><a class="dropdown-item" href="/student/update">Edit</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+                
             </ul>
         </li>
         {% else %}
