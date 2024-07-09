@@ -15,9 +15,14 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
+from yearbook import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", include("yearbook.urls")),
+    re_path(r'^.*/$', views.error_404, name='error_404'),
 ]
+
+# Define a custom handler for 404 errors
+handler404 = 'yearbook.views.error_404'

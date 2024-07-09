@@ -158,3 +158,6 @@ class PostCommentView(LoginRequiredMixin, View):
             comment.save()
             messages.success(request, 'Your comment has been posted.')
         return redirect('student_detail', student_id=student_id)
+    
+def error_404(request, exception):
+    return render(request, 'yearbook/not_found.html', status=404)

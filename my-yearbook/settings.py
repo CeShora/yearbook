@@ -27,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-6trrztgx_5^@rkimd5#+i6)9!!+y_ae#f5zlm2!o)g)aj(iyiw'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['yearbook.darkube.app','autbase.ir', '127.0.0.1', 'localhost']
 CSRF_TRUSTED_ORIGINS = ['https://autbase.ir', 'https://yearbook.darkube.app']
