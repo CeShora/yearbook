@@ -11,6 +11,12 @@ COPY . /app/
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
+
+RUN python manage.py makemigrations yearbook
+RUN python manage.py migrate
+
+RUN python manage.py collectstatic --noinput
+
 EXPOSE 80
 
 CMD ["python", "manage.py", "runserver", "0.0.0.0:80"]
