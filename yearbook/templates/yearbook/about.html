@@ -1,1 +1,51 @@
-hello from about.html
+{% extends 'base.html' %}
+{% block title %}About{% endblock %}
+{% load static %}
+
+{% block extra_css %}
+<style>
+    .row {
+        padding: 60px 30%; 
+    }
+    .about-section {
+        background-color: rgba(23, 38, 79, 0.7); 
+        padding: 60px 0; 
+        color: #fff;
+        text-align: center;
+    }
+    .about-content {
+        margin: 0 auto;
+        max-width: 800px;
+    }
+    .about-title {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+    }
+    .about-text {
+        font-size: 1.2rem;
+        line-height: 1.6;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="about-section">
+    <div class="row">
+        <div class="about-content">
+            <h2 class="about-title">About Memoir Alcove</h2>
+            <p class="about-text">
+                Welcome to Memoir Alcove, a dedicated space to celebrate and cherish the memories of our students. This platform is designed to serve as a repository of the significant moments, achievements, and stories of the students who have journeyed through our halls.
+            </p>
+            <p class="about-text">
+                In the <strong>Remembrance Hall</strong>, you'll find tributes to the staff and individuals who have made a lasting impact on our community. This section honors their contributions and highlights their dedication.
+            </p>
+            <p class="about-text">
+                The <strong>Reminiscence Wall</strong> is a dynamic space where students can share their personal memories, connect with peers, and leave a lasting legacy. Here, everyone can see the collective experiences and reflections of the student body.
+            </p>
+            <p class="about-text">
+                Our mission is to create a vibrant and engaging environment where memories can be preserved and revisited, fostering a sense of belonging and nostalgia for all who visit.
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}
