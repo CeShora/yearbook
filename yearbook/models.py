@@ -57,7 +57,7 @@ class Student(AbstractUser):
 
 
 class Answer(models.Model):
-    student = models.ForeignKey(Student, on_delete=models.DO_NOTHING, related_name='answers')
+    student = models.ForeignKey(Student, on_delete=models.CASCADE, related_name='answers')
     question_number = models.IntegerField()
     answer_text = models.TextField(blank=True, null=True)
 
