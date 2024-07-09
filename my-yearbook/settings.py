@@ -13,6 +13,9 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 import os
 from pathlib import Path
 
+#for the messages
+from django.contrib.messages import constants as messages
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -26,8 +29,10 @@ SECRET_KEY = 'django-insecure-6trrztgx_5^@rkimd5#+i6)9!!+y_ae#f5zlm2!o)g)aj(iyiw
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['yearbook.darkube.app','autbase.ir']
+ALLOWED_HOSTS = ['yearbook.darkube.app','autbase.ir', '127.0.0.1', 'localhost']
 CSRF_TRUSTED_ORIGINS = ['https://autbase.ir', 'https://yearbook.darkube.app']
+
+LOGOUT_REDIRECT_URL = '/'
 
 
 # Application definition
@@ -55,6 +60,17 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'my-yearbook.urls'
 
+#for messages
+MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
+MESSAGE_TAGS = {
+    messages.DEBUG: 'debug',
+    messages.INFO: 'info',
+    messages.SUCCESS: 'success',
+    messages.WARNING: 'warning',
+    messages.ERROR: 'error',
+}
+
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -71,6 +87,7 @@ TEMPLATES = [
     },
 ]
 
+
 WSGI_APPLICATION = 'my-yearbook.wsgi.application'
 
 
@@ -78,13 +95,17 @@ WSGI_APPLICATION = 'my-yearbook.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {    
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('DATABASE_NAME'),
-        'USER': os.getenv('DATABASE_USER'),
-        'PASSWORD': os.getenv('DATABASE_PASSWORD'),
-        'HOST': os.getenv('DATABASE_HOST'),
-        'PORT': os.getenv('DATABASE_PORT'),
+    # 'default': {    
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'NAME': os.getenv('DATABASE_NAME'),
+    #     'USER': os.getenv('DATABASE_USER'),
+    #     'PASSWORD': os.getenv('DATABASE_PASSWORD'),
+    #     'HOST': os.getenv('DATABASE_HOST'),
+    #     'PORT': os.getenv('DATABASE_PORT'),
+    # },
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
