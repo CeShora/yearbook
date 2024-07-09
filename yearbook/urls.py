@@ -5,12 +5,12 @@ from . import views
 from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
-    path('', views.home, name='home'), #TODO ADD HALL OF FAME, GALLERY, CLEAN A BIT
+    path('', views.home, name='home'), #TODO GALLERY, CLEAN A BIT
     path('remembrancehall/', views.remembrancehall, name='remembrancehall'),
     path('about/', views.about, name='about'),
     path('reminiscencewall/', views.reminiscencewall, name='reminiscencewall'),
     path('students/', views.student_list, name='student_list'), # NEED TO ADD FILTERS
-    path('student/new/', views.student_create, name='student_create'),  # JUST CHECK ABOUT LOGIN
+    path('student/new/', views.student_create, name='student_create'),  
     path('student/update/', views.student_update, name='student_update'),
     path('student/<str:student_id>/', views.student_detail, name='student_detail'), # ADD THE IMAGE LATER
     path('student/<int:student_id>/comment/', views.PostCommentView.as_view(), name='post_comment'),

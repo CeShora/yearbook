@@ -105,7 +105,7 @@ def student_update(request):
         form = StudentProfileForm(request.POST, instance=student)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Your profile was successfully updated.')
+            messages.success(request, 'آپدیت شد')
 
         # Process answer forms for each question
         for i, question in enumerate(QUESTIONS):
