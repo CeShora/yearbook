@@ -2,11 +2,15 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import View
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import login, authenticate
 from django.contrib import messages
 from .models import QUESTIONS, Answer, Student
 from .forms import CommentForm, StudentProfileForm, AnswerFormSet, get_dynamic_answer_forms
 from .forms import StudentRegistrationForm
 from django.contrib.auth.views import LoginView
+
+#for messages:
+from django.contrib import messages
 
 def home(request):
     return render(request, "yearbook/home.html")
@@ -70,7 +74,15 @@ def student_create(request):
                         question_number=i,
                         answer_text=answer_text
                     )
-            return redirect('student_list')
+            # Authenticate the user
+            student = authenticate(student_id=student.student_id, password=student_form.cleaned_data.get('password1'))
+            if student is not None:
+                login(request, student)
+                messages.success(request, 'ثبت نام با موفقیت انجام شد و شما وارد شدید.')
+                return redirect('student_list')
+            else:
+                messages.error(request, 'مشکلی در ورود به سیستم وجود دارد.')
+                return redirect('login')  # Redirect to login page if authentication fails
     else:
         student_form = StudentRegistrationForm()
         answer_form = DynamicAnswerForm()
