@@ -5,7 +5,7 @@
 {% block extra_css %}
 <style>
     .row {
-        padding: 60px 30%; 
+        padding: 40px 20%; 
     }
     .about-section {
         background-color: rgba(23, 38, 79, 0.7); 
@@ -15,16 +15,51 @@
     }
     .about-content {
         margin: 0 auto;
-        max-width: 800px;
+        max-width: 900px;
+        padding: 20px; 
     }
+
+    .left-aligned{
+        text-align: left !important;
+    }
+
     .about-title {
         font-size: 2.5rem;
         margin-bottom: 20px;
     }
     .about-text {
         font-size: 1.2rem;
-        line-height: 1.6;
+        line-height: 1.8  !important;
     }
+    @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap');
+
+    .desc-text {
+        font-size: 1.2rem !important;
+        line-height: 1.8  !important;
+        font-family: 'Dancing Script', cursive !important;
+    }
+
+    @import url('https://fonts.googleapis.com/css2?family=Playwrite+HR:wght@100..400&display=swap');
+
+    .signature-text {
+        font-size: 1.2rem !important;
+        line-height: 1.6 !important;
+        font-family: "Playwrite HR", cursive !important;
+        font-optical-sizing: auto !important;
+        font-weight: 20 ;
+        font-style: normal !important;
+    }
+    
+    .blue{
+        color: rgb(23, 38, 79) !important;
+    }
+    
+    .light-blue{
+        color: rgb(0,162,232) !important;
+    }
+    
+
+
 </style>
 {% endblock %}
 
@@ -32,19 +67,18 @@
 <div class="about-section">
     <div class="row">
         <div class="about-content">
-            <h2 class="about-title">About Memoir Alcove</h2>
-            <p class="about-text">
-                Welcome to Memoir Alcove, a dedicated space to celebrate and cherish the memories of our students. This platform is designed to serve as a repository of the significant moments, achievements, and stories of the students who have journeyed through our halls.
-            </p>
-            <p class="about-text">
-                In the <strong>Remembrance Hall</strong>, you'll find tributes to the staff and individuals who have made a lasting impact on our community. This section honors their contributions and highlights their dedication.
-            </p>
-            <p class="about-text">
-                The <strong>Reminiscence Wall</strong> is a dynamic space where students can share their personal memories, connect with peers, and leave a lasting legacy. Here, everyone can see the collective experiences and reflections of the student body.
-            </p>
-            <p class="about-text">
-                Our mission is to create a vibrant and engaging environment where memories can be preserved and revisited, fostering a sense of belonging and nostalgia for all who visit.
-            </p>
+            <h2 class="about-title">Why a yearbook? Why Autbase?</h2>
+            <p class="about-text">"It's been a long day without you, my friend<br>
+            And I'll tell you all about it when I see you again"</p>
+            <p class="about-text">I still remember the first time I came to the CE department of AUT. I look back on those memories with fondness and a happy heart, as I know many of us do and will continue to do. This website exists for that very reason: to help us remember who we were when we first joined CE@AUT and to remind us of the growth and changes we've experienced, shaping us into the people we are now as we leave.</p>
+            <ul>
+                <li> <p class="desc-text left-aligned">If you are an AUT CE graduate (Class of '98), I invite you to create an account and reminisce with your classmates about the days we shared.</p> </li>
+                <li> <p class="desc-text left-aligned">If you are a recent graduate from any other AUT department, email me, and I will create a space for your class on the website.</p> </li>
+                <li> <p class="desc-text left-aligned">If you want to create a yearbook like this one for your own graduating class, you can access the source code on my GitHub repo.</p> </li>
+                <li> <p class="desc-text left-aligned">If you enjoyed the site, I kindly ask you to give a star to the repo. It means a lot to me.</p> </li>
+            </ul>
+            <p class="about-text light-blue">Lastly, this yearbook was made and is now hosted on a server that I have rented with my own pocket money. If you liked the site and are in a position to help, please contact me. As of now, I am uncertain about the site’s future stability due to financial constraints.</p>
+            <p class="signature-text left-aligned blue"><strong>Your fellow classmate, Negin Kheirmand</strong></p>
         </div>
     </div>
 </div>
