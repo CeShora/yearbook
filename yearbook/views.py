@@ -44,7 +44,7 @@ def student_detail(request, student_id):
             comment.student = student
             comment.user = request.user
             comment.save()
-            messages.success(request, 'Your comment has been posted.')
+            messages.success(request, 'کامنت شما اضافه شد')
             return redirect('student_detail', student_id=student_id)
     else:
         comment_form = CommentForm()
@@ -139,7 +139,7 @@ def student_delete(request, student_id):
     student = get_object_or_404(Student, student_id=student_id)
     if request.method == 'POST':
         student.delete()
-        messages.success(request, 'Student deleted successfully.')
+        messages.success(request, 'با موفقیت حذف شد')
         return redirect('student_list')
     return render(request, 'yearbook/student_confirm_delete.html', {'student': student})
 
@@ -156,7 +156,7 @@ class PostCommentView(LoginRequiredMixin, View):
             comment.student = student
             comment.user = request.user
             comment.save()
-            messages.success(request, 'Your comment has been posted.')
+            messages.success(request, 'کامنت شما اضافه شد')
         return redirect('student_detail', student_id=student_id)
     
 def error_404(request, exception):
